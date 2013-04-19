@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"path": "repo"
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 8
+    },
+    "build_systems":
+    [
+        {
+            "name": "Install",
+            "cmd": ["rokuinstall.sh", "packages"]
+        },
+        {
+            "name": "Replace",
+            "cmd": ["rokureplace.sh", "packages"]
+        }
+    ]
+}
