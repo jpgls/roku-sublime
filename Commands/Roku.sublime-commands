@@ -1,0 +1,14 @@
+[
+    {
+    	"caption": "Roku: Install", 
+    	"command": "roku_install" 
+    },
+    {
+    	"caption": "Roku: Replace", 
+    	"command": "roku_replace" 
+    },
+    {
+    	"caption": "Roku: Package", 
+    	"command": "roku_package" 
+    }
+]
