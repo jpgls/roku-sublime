@@ -3,6 +3,7 @@ import os, sys
 import subprocess
 import re
 import zipfile
+import json
 
 def get_root_directory(self):
 	folders = self.window.folders();
@@ -54,26 +55,25 @@ class RokuPackageCommand(sublime_plugin.WindowCommand):
 					arcname.find('.sublime') == -1 and
 					arcname.find('build') == -1):
 						print('zipping %s as %s' % (os.path.join(dirname, filename), arcname));
-						zf.write(absname, arcname)
-		zf.close()
-		
-		# result = subprocess.Popen([
-		# 	'zip', '-r', projectDir + os.sep + 'build' + os.sep + projectName + '.zip', 
-		# 	get_root_directory(self), '-x', '*.git*'],
-		# 	stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		
-		# output, errors = result.communicate()
-		
-		# if result.returncode:
-		# 	print(output.decode());
-		# else: 
-		# 	print(output.decode());
+						zf.write(absname, arcname);
+		zf.close();
 			
 		print('packaging complete.');
 
-class RokuInstallCommand(sublime_plugin.ApplicationCommand):
-	def run(args):
+# need tofigure out how to load a settings file so we can get the ip addy
+class RokuInstallCommand(sublime_plugin.WindowCommand):
+	def run(self):
 		print('Installing...');
+		
+		projectDir = get_root_directory(self);
+		projectName = get_project_name(projectDir);
+		projectJson = open(projectDir + os.sep + projectName + '.sublime-project');
+		
+		# need to add error handling for json parsing.
+		projectSettings = json.load(projectJson);
+		
+		print(projectSettings['ip']);
+		
 		# result = subprocess.Popen([
 		# 	'curl', '-F', 
 		# 	'archive=@$1.zip;type=application/zip', 
